@@ -47,7 +47,7 @@ public class TestPalindrome {
         assertTrue(palindrome.isPalindrome("abchgf",byFive));
         assertTrue(palindrome.isPalindrome("abcdhgf",byFive));
         assertFalse(palindrome.isPalindrome("efghi",byFive));
-        
+
 
     }
 }
