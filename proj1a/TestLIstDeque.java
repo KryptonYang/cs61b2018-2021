@@ -59,6 +59,10 @@ public class TestLIstDeque {
         }
         int[] expected = {21,20,19,18,17,16,15,14,13,12,11,10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         Assert.assertArrayEquals(output, expected);
+        for(int i: expected) {
+            a.addFirst(i);
+        }
+        Assert.assertEquals(21,a.size());
     }
     @Test
     public void TestRecursiveGet() {
