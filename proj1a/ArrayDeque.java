@@ -1,12 +1,14 @@
+import java.util.Iterator;
+
 /**implements Deque with ArrayList*/
-public class ArrayListDeque<T> implements LIstDeque<T>{
+public class ArrayDeque<T> implements LIstDeque<T>, Iterable<T>{
     T[] items;
     int size;               //changes whether add or remove
     int nextLast;           //nestLast only changes when call addLast/removeLast
     int nextFirst;          //nextFirst only changes when call addFirst/removeFirst
     int capability;
 
-    public ArrayListDeque(){
+    public ArrayDeque(){
         size = 0;
         nextLast = 4;
         nextFirst = 3;
@@ -15,6 +17,26 @@ public class ArrayListDeque<T> implements LIstDeque<T>{
 
     }
     /** helper method to reposition nestLast/nextFirst, to avoid null pointer*/
+    public Iterator<T> iterator() {
+        return new LLiterator<T>();
+    }
+    private class LLiterator<T> implements Iterator<T> {
+        int current;
+        public LLiterator(){
+            current = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return items[current] != null;
+        }
+
+        @Override
+        public T next() {
+            T next = (T) items[current];
+            current += 1;
+            return next;
+        }
+    }
     private int reposition(int next, int capability) {
         if(next >= capability) {
             next -= capability;
@@ -130,11 +152,14 @@ public class ArrayListDeque<T> implements LIstDeque<T>{
     }
 
     public static void main(String[] args) {
-        ArrayListDeque<String> w = new ArrayListDeque<>();
+        ArrayDeque<String> w = new ArrayDeque<>();
         String array[] = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k","l","m","n","o","p","q"};
         for (int i = 0; i < array.length; i++) {
             w.addLast(array[i]);
         }
-        w.printDeque();
+        for(String a :w){
+            System.out.println(a);
+        }
+//        w.printDeque();
     }
 }

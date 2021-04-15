@@ -5,7 +5,7 @@ import org.junit.Assert;
 public class TestLIstDeque {
     @Test
     public void TestAddLast(){
-        LIstDeque a = new ArrayListDeque();
+        LIstDeque a = new ArrayDeque();
         String[] input = {"I", "love", "you", "for", "a", "thousand"};
         for(String i:input){
             a.addLast(i);
@@ -19,7 +19,7 @@ public class TestLIstDeque {
     }
     @Test
     public void TestAddFirst() {
-        LIstDeque a = new ArrayListDeque();
+        LIstDeque a = new ArrayDeque();
         int[] input = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21};
         for(int i:input){
             a.addFirst(i);
@@ -33,7 +33,7 @@ public class TestLIstDeque {
     }
     @Test
     public void TestRemoveFirst(){
-        LIstDeque a = new ArrayListDeque();
+        LIstDeque a = new ArrayDeque();
         int[] input = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21};
         for(int i:input){
             a.addLast(i);
@@ -47,7 +47,7 @@ public class TestLIstDeque {
     }
     @Test
     public void TestRemoveLast() {
-        LIstDeque a = new ArrayListDeque();
+        LIstDeque a = new ArrayDeque();
         int[] input ={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21};
         for (int i : input) {
             a.addLast(i);

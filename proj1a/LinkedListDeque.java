@@ -1,5 +1,7 @@
+import java.util.Iterator;
+
 /** LinkedListDeque is a Deque implements Linked List. It has pointers pointing both its previous and next */
-public class LinkedListDeque<T> implements LIstDeque<T> {
+public class LinkedListDeque<T> implements LIstDeque<T>,Iterable<T> {
     /**the sentinel has three parts, its head pints to previous item, body contains objest and
      * tail points to next item*/
     private static class Node<T>{
@@ -21,6 +23,32 @@ public class LinkedListDeque<T> implements LIstDeque<T> {
         sentinel.tail = sentinel;
         size = 0;
 
+    }
+    public SSiterator<T> iterator(){
+        return new SSiterator();
+    }
+    private class SSiterator<T> implements Iterator<T>{
+        public Node cursor;
+        public int howbig;
+
+        public SSiterator(){
+            cursor = sentinel.tail;
+            howbig = size;
+
+        }
+        @Override
+        public boolean hasNext(){
+            return cursor.body!= null && howbig != 0;
+
+        }
+
+        @Override
+        public T next(){
+            T item = (T)cursor.body;
+            cursor = cursor.tail;
+            howbig -= 1;
+            return item;
+        }
     }
     /**add item T to first position that is pointed by sentinel.tail
      * @param item*/
@@ -109,7 +137,9 @@ public class LinkedListDeque<T> implements LIstDeque<T> {
         for (int i = 0; i< array.length; i++) {
             w.addLast(array[i]);
         }
-        w.printDeque();
+        for(String a:w){
+            System.out.println(a);
+        }
 
     }
 
