@@ -1,6 +1,6 @@
 package synthesizer;
 
-public interface BoundedQueue<T> {
+public interface BoundedQueue<T> extends Iterable<T> {
     /**return the size of the buffer*/
     int capacity();
     /**return number of items currently in the buffer*/
@@ -11,6 +11,7 @@ public interface BoundedQueue<T> {
     T dequeue();
     /**return but do not delete the item from the front */
     T peek();
+
 
     default boolean isEmpty() {
         return fillCount() == 0;

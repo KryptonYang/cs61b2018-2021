@@ -2,7 +2,7 @@ package synthesizer;
 import java.util.Iterator;
 
 
-public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Iterable<T> {
+public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T>  {
     /* Index for the next dequeue or peek. */
     private int first;            // index for the next dequeue or peek
     /* Index for the next enqueue. */
@@ -19,7 +19,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
         //       this.capacity should be set appropriately. Note that the local variable
         //       here shadows the field we inherit from AbstractBoundedQueue, so
         //       you'll need to use this.capacity to set the capacity.
-        Capacity = capacity;
+        this.capacity = capacity;
         fillCount = 0;
         first = capacity/2;
         last = first;
@@ -34,13 +34,13 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
      */
     @Override
     public void enqueue(T x) {
-        if(fillCount == Capacity){
+        if(fillCount >= capacity){
             throw new RuntimeException("Ring buffer overflow");
         }
         rb[last] = x;
         last += 1;
-        if(last == Capacity){
-            last = last - Capacity;
+        if(last == capacity){
+            last = last - capacity;
         }
         fillCount += 1;
     }
@@ -53,14 +53,14 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
     @Override
     public T dequeue() {
         // TODO: Dequeue the first item. Don't forget to decrease fillCount and update
-        if(fillCount == 0) {
+        if(fillCount <= 0) {
             throw new RuntimeException("Ring buffer underflow");
         }
         T firstItem = rb[first];
         rb[first] = null;
         first += 1;
-        if(first == Capacity){
-            first = first - Capacity;
+        if(first == capacity){
+            first = first - capacity;
         }
         fillCount -= 1;
         return firstItem;
@@ -80,7 +80,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
         return new QueueIterator();
     }
 
-    private class QueueIterator<T> implements Iterator<T>{
+    private class QueueIterator implements Iterator<T>{
         int widpiont;
         int size;
         public QueueIterator(){
@@ -97,8 +97,8 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
             T next = (T) rb[widpiont];
             widpiont += 1;
             size -= 1;
-            if(widpiont == Capacity ){
-                widpiont -= Capacity;
+            if(widpiont == capacity ){
+                widpiont -= capacity;
             }
             return next;
         }
